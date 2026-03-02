@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primera Comunión de Sayri</title>
+    <style>
+        :root {
+            --verde: #a3b18a;
+            --dorado: #b19451;
+            --blanco: #ffffff;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            font-family: 'Georgia', serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .invitacion-web {
+            background-color: var(--blanco);
+            max-width: 500px;
+            width: 100%;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .foto-perfil {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid var(--verde);
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .texto-cursivo {
+            font-style: italic;
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        .fecha-grande {
+            color: var(--dorado);
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        /* Estilos Cuenta Atrás */
+        #cuenta-atras {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            background: #f4f4f2;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .tiempo-segmento {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .numero {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--verde);
+        }
+
+        .etiqueta {
+            font-size: 0.7em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Botones de Mapas */
+        .seccion-mapas {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .boton-mapa {
+            background-color: var(--verde);
+            color: white;
+            padding: 12px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 0.9em;
+            transition: opacity 0.3s;
+        }
+
+        .boton-mapa:hover {
+            opacity: 0.8;
+        }
+
+        .footer-nota {
+            font-size: 0.8em;
+            margin-top: 40px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+<div class="invitacion-web">
+   
+    <p class="texto-cursivo">Sayri os invita a celebrar su primera comunión el</p>
+    <div class="fecha-grande">09.05.2026</div>
+    <p><strong>10:30h</strong></p>
+    <p>En la parroquia de San Francisco de Asís, Sevilla.</p>
+    <p style="margin-top: 30px;">Después, a las 13:30h nos veremos para el almuerzo en <strong>Hacienda la Alboreá</strong>.</p>
+    <div id="cuenta-atras">
+        <div class="tiempo-segmento"><span class="numero" id="dias">00</span><span class="etiqueta">Días</span></div>
+        <div class="tiempo-segmento"><span class="numero" id="horas">00</span><span class="etiqueta">Hs</span></div>
+        <div class="tiempo-segmento"><span class="numero" id="minutos">00</span><span class="etiqueta">Min</span></div>
+        <div class="tiempo-segmento"><span class="numero" id="segundos">00</span><span class="etiqueta">Seg</span></div>
+    </div>
+
+    <div class="seccion-mapas">
+        <p><strong>¿Cómo llegar?</strong></p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Parroquia+San+Francisco+de+Asis+Sevilla" target="_blank" class="boton-mapa">📍 Ir a la Parroquia</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Hacienda+la+Alborea+Sevilla" target="_blank" class="boton-mapa">🍽️ Ir a la Hacienda</a>
+    </div>
+
+    <p class="footer-nota">Se ruega confirmación antes del 9 de abril</p>
+    </div>
+
+<script>
+    // Configurar la fecha del evento
+    const fechaEvento = new Date('May 9, 2026 10:30:00').getTime();
+
+    const x = setInterval(function() {
+        const ahora = new Date().getTime();
+        const distancia = fechaEvento - ahora;
+
+        const d = Math.floor(distancia / (1000 * 60 * 60 * 24));
+        const h = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((distancia % (1000 * 60)) / 1000);
+
+        document.getElementById("dias").innerHTML = d;
+        document.getElementById("horas").innerHTML = h;
+        document.getElementById("minutos").innerHTML = m;
+        document.getElementById("segundos").innerHTML = s;
+
+        if (distancia < 0) {
+            clearInterval(x);
+            document.getElementById("cuenta-atras").innerHTML = "¡Es el gran día!";
+        }
+    }, 1000);
+</script>
+
+</body>
+</html>
